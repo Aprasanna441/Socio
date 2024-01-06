@@ -4,7 +4,7 @@ import Profile from '../auth/Profile'
 
 const Drawer=createDrawerNavigator()
 
-const Home = () => {
+const Home = ({navigation}) => {
   return (
     <Drawer.Navigator screenOptions={{headerStyle:{backgroundColor:'purple'}}}>
     <Drawer.Screen name='Profile' component={Profile} />
