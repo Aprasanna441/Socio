@@ -1,13 +1,19 @@
 
-import React, { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect, useState,createRef } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Pressable,TouchableOpacity } from 'react-native';
 
-const Login = () => {
+
+import { navigationRef } from '../../../App';
+
+
+const Login = ({navigation}) => {
+
 
   const [data,setData]=useState({name:"",email:"",password:"",password2:""})
 
   const login= async ()=>{
-    const res=await fetch('http://192.168.1.4:8001/user/signup',{
+    const res=await fetch('http://192.168.1.3:8000/user/signup/',{
       method:'POST',
       headers:{
         'Content-Type':'application/json'
@@ -16,8 +22,15 @@ const Login = () => {
 
     })
     const result=await res.json()
-    console.warn("resulttt")
-    console.warn(result)
+    if (result.errors){
+      console.warn("error has occured")
+    }
+    else{
+       await AsyncStorage.setItem("access_token",result.token.access)
+       console.warn(AsyncStorage.getItem("token"))
+       navigationRef.current?.navigate('Home');
+    }
+   
   }
 
   

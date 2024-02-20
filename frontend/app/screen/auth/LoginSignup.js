@@ -3,7 +3,7 @@ import Signup from "./Signup";
 
 import { StyleSheet, Text, View, Button, Pressable, Image, KeyboardA ,StatusBar} from 'react-native'
 import React, { useState } from 'react'
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+
 
 const LoginSignup = () => {
 

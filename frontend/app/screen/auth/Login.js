@@ -2,32 +2,42 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Pressable,TouchableOpacity } from 'react-native';
 
-const Login = () => {
+const login= async ()=>{
 
-  const [data,setData]=useState({name:"",email:"",password:"",password2:""})
+  const [data,setData]=useState({email:"",password:""})
 
-  const login= async ()=>{
-    const res=await fetch('http://192.168.1.4:8001/user/signup',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify(data)
+  const res=await fetch('http://192.168.1.3:8000/user/login/',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify(data)
 
-    })
-    const result=await res.json()
-    console.warn("resulttt")
-    console.warn(result)
+  })
+  const result=await res.json()
+  if (result.errors){
+    console.warn("error has occured")
   }
+  else{
+     await AsyncStorage.setItem("access_token",result.token.access)
+     console.warn(AsyncStorage.getItem("token"))
+     navigationRef.current?.navigate('Home');
+  }
+ 
+}
 
-  
- useEffect(()=>{
-// console.warn("Hi")
- },[])
+
+
+const Login = () => {
+ 
+
+
+
+
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Create a New Account</Text>
+      <Text style={styles.title}>Createe a New Account</Text>
     
       <TextInput
         style={styles.input}
@@ -56,7 +66,9 @@ const Login = () => {
       
     </View>
   );
-};
+}
+  export default Login
+
 
 const styles = StyleSheet.create({
   container: {
@@ -98,4 +110,3 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login;
