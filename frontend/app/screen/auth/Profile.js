@@ -1,12 +1,18 @@
 import React from 'react'
-import { Text,View,StyleSheet } from 'react-native'
+import { Text,View,StyleSheet,Image } from 'react-native'
 const Profile = () => {
   return (
     <View style={styles.main}>
-        <Text>Profile</Text>
-        <Text>Profile</Text>
-        <Text>Profile</Text>
-        <Text>Profile</Text>
+      <View style={styles.container}>
+               <View style={styles.profilePictureContainer} >
+           <Image style={styles.profilePicture}  source={require('../../../images/cover1.jpg')}/>
+       </View>
+       <View style={styles.followerSection}>
+<Text>Hellof
+  
+</Text>
+       </View>
+       </View>
     </View>
   )
 }
@@ -14,7 +20,29 @@ const Profile = () => {
 const styles=StyleSheet.create({
 main:{
     backgroundColor:'red'
+},
+container:{
+  flex:1,
+  flexDirection:'row',
 }
+,profilePictureContainer:{
+ 
+  flex:0.5,
+  backgroundColor:'red',
+ 
+ 
+
+},
+profilePicture:{
+borderRadius:100,
+
+ 
+   
+},
+followerSection:{
+  flex:3
+},
+
 })
 
 export default Profile
